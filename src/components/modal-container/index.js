@@ -1,4 +1,4 @@
-import './modal.js'
+import '../modal'
 
 
 class ModalContainer extends HTMLElement {

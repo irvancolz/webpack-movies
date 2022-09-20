@@ -1,4 +1,4 @@
-import "./movie-card.js";
+import "../movie-card";
 
 class MovieList extends HTMLElement {
   constructor() {
