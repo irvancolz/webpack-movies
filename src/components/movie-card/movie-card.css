@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+}
+.container{
+    cursor: pointer;
+    padding: .5rem;
+    border-radius: .3rem;
+    background-color: var(--white-col);
+    box-shadow: 0 0 .75rem var(--shadow-col);
+}
+.poster{
+    max-width: 200px;
+    border-radius: .2rem;
+    transition: filter .2s ease-in-out;
+}
+.title{
+    width: 100%;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.container:hover .poster{
+    filter: brightness(.8);
+}
+@media(max-width: 600px){
+    .movie-card {
+        flex-basis: 45%;
+      }
+      .movie-card .poster,
+      .movie-card .title {
+        max-width: 150px;
+      }
+      .movie-card .title {
+        font-size: 1rem;
+      }
+}
