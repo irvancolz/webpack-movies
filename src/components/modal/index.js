@@ -10,64 +10,6 @@ class MovieModal extends HTMLElement {
       this.render();
     }
   
-    // show error message
-    set renderError(message) {
-      this.shadowRoot.innerHTML = `
-      <style>
-      <style>
-      *{
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      .modal {
-        padding: 1.5rem;
-        border-radius: 0.5rem;
-        background-color: var(--white-col);
-        box-shadow: 0 0 0.75rem var(--shadow-col);
-      }
-      .modal-header {
-        display: flex;
-        justify-content: space-between;
-      }
-      .modal-header .title {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-        font-size: 1.35rem;
-        font-weight: 600;
-      }
-      .modal-header .title span {
-        font-size: 2.1rem;
-        font-weight: 400;
-      }
-      .modal-header .close-btn {
-        font-size: 3rem;
-        font-weight: 100;
-        cursor: pointer;
-      }
-      .modal-body {
-        display: flex;
-        gap: 1rem;
-        padding: 1rem;
-      }
-      </style>
-      <div class="modal">
-        <div class="modal-header">
-          <span class="title">
-            <span>&lt;</span>
-            Movie Detail
-          </span>
-          <span class="close-btn"> &times; </span>
-        </div>
-        <div class="modal-body">
-          <h1>${message}</h1>
-        </div>
-      </div>
-      `;
-    }
-  
     static get observedAttributes() {
       return ["_movies"];
     }
