@@ -1,24 +1,24 @@
 class SearchBar extends HTMLElement {
-    constructor() {
-      super();
-      this.shadowDOM = this.attachShadow({ mode: "open" });
-    }
-  
-    connectedCallback() {
-      this.render();
-    }
-  
-    get value() {
-      return this.shadowDOM.querySelector(".input").value;
-    }
-  
-    set clickEvent(event) {
-      this._clickEvent = event;
-      this.render();
-    }
-  
-    render() {
-      this.shadowDOM.innerHTML = `
+  constructor() {
+    super();
+    this.shadowDOM = this.attachShadow({ mode: "open" });
+  }
+
+  connectedCallback() {
+    this.render();
+  }
+
+  get value() {
+    return this.shadowDOM.querySelector(".input").value;
+  }
+
+  set clickEvent(event) {
+    this._clickEvent = event;
+    this.render();
+  }
+
+  render() {
+    this.shadowDOM.innerHTML = `
           <style>
           * {
               margin: 0;
@@ -99,10 +99,11 @@ class SearchBar extends HTMLElement {
             </button>
           </form>
           `;
-      this.shadowDOM.querySelector(".form").addEventListener("submit", (e) => {
-        e.preventDefault();
-        this._clickEvent();
-      });
-    }
+    this.shadowDOM.querySelector(".form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      this._clickEvent();
+    });
   }
-  customElements.define("search-bar", SearchBar);
+}
+
+customElements.define("search-bar", SearchBar);

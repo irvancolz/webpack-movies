@@ -4,4 +4,4 @@ import "./src/components/search-bar";
 import "./src/style/style.css"
 import main from './src/index.js';
 
-document.addEventListener('DOMContentLoaded', main());
+document.addEventListener('DOMContentLoaded', main);

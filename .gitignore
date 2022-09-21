@@ -1,8 +1,5 @@
 # node modules
 node_modules
 
-# git ignore
-.gitignore
-
-#dist
-dist
+# build folder
+dist/

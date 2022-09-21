@@ -3,7 +3,7 @@ import "../movie-card";
 class MovieList extends HTMLElement {
   constructor() {
     super();
-    this.shadowDOM = this.attachShadow({mode: 'open'});
+    this.shadowDOM = this.attachShadow({ mode: "open" });
   }
 
   set movieList(list) {
@@ -26,7 +26,6 @@ class MovieList extends HTMLElement {
     this._movieList.forEach((list) => {
       const movieCard = document.createElement("movie-card");
       movieCard.movies = list;
-
       this.shadowDOM.appendChild(movieCard);
     });
   }

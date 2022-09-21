@@ -1,5 +1,4 @@
-import '../modal'
-
+import "../modal";
 
 class ModalContainer extends HTMLElement {
   constructor() {
@@ -7,18 +6,15 @@ class ModalContainer extends HTMLElement {
     this.shadowDOM = this.attachShadow({ mode: "open" });
   }
 
-
   connectedCallback() {
     this.render();
     // this.visibility = true;
   }
 
-
   // visibility handler
   get visibility() {
     return this.hasAttribute("visible");
   }
-
 
   set visibility(value) {
     if (value) {
@@ -28,12 +24,10 @@ class ModalContainer extends HTMLElement {
     }
   }
 
-  
-  set movies(value){
+  set movies(value) {
     this._movies = value;
     this.render();
   }
-
 
   attributeChangedCallback(name, oldValue, newValue) {
     if (name === "visible") {
@@ -45,14 +39,12 @@ class ModalContainer extends HTMLElement {
     }
   }
 
-
   static get observedAttributes() {
-    return ["visible", '_errorMessage'];
+    return ["visible", "_errorMessage"];
   }
 
-
   render() {
-    const modalClass = this.visibility ? 'container visible' : 'container';
+    const modalClass = this.visibility ? "container visible" : "container";
     this.shadowDOM.innerHTML = `
         <style>
         *{
@@ -82,21 +74,19 @@ class ModalContainer extends HTMLElement {
         <div class="${modalClass}"></div>
     `;
 
-    if(this._movies){
-        const modalEL = document.createElement('movie-modal');
-        modalEL.movies = this._movies;
-
-        this.shadowDOM.querySelector('.container').appendChild(modalEL);
+    if (this._movies) {
+      const modalEL = document.createElement("movie-modal");
+      modalEL.movies = this._movies;
+      this.shadowDOM.querySelector(".container").appendChild(modalEL);
     }
 
     this.shadowDOM
-    .querySelector(".container")
-    .addEventListener("click", (e) => {
-      if (e.target.className.includes("container")) {
-        this.visibility = false;
-      }
-    });
-
+      .querySelector(".container")
+      .addEventListener("click", (e) => {
+        if (e.target.className.includes("container")) {
+          this.visibility = false;
+        }
+      });
   }
 }
 customElements.define("modal-container", ModalContainer);

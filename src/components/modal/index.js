@@ -1,22 +1,23 @@
+import VanillaTilt from "vanilla-tilt";
+
 class MovieModal extends HTMLElement {
-    constructor() {
-      super();
-      this.shadowDOM = this.attachShadow({ mode: "open" });
-    }
-  
-    // get the movie data from API call
-    set movies(value) {
-      this._movies = value;
-      this.render();
-    }
-  
-    static get observedAttributes() {
-      return ["_movies"];
-    }
-  
-  
-    render() {
-      this.shadowRoot.innerHTML = `
+  constructor() {
+    super();
+    this.shadowDOM = this.attachShadow({ mode: "open" });
+  }
+
+  // get the movie data from API call
+  set movies(value) {
+    this._movies = value;
+    this.render();
+  }
+
+  static get observedAttributes() {
+    return ["_movies"];
+  }
+
+  render() {
+    this.shadowRoot.innerHTML = `
       <style>
       *{
         margin: 0;
@@ -143,13 +144,15 @@ class MovieModal extends HTMLElement {
                 </div>
               </div>
             </div>
-            </div>
-      `;
-        this.shadowDOM.querySelector('.close-btn').addEventListener('click',()=>{
-          document.querySelector('modal-container').visibility = false;
-        })
-    }
+            </div>`;
+    this.shadowDOM.querySelector(".close-btn").addEventListener("click", () => {
+      document.querySelector("modal-container").visibility = false;
+    });
+    VanillaTilt.init(this.shadowDOM.querySelector('.poster'),{
+      reverse: true,
+      scale: 1.05,
+    })
   }
-  
-  customElements.define("movie-modal", MovieModal);
-  
+}
+
+customElements.define("movie-modal", MovieModal);

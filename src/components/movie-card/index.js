@@ -6,6 +6,7 @@ class MovieCard extends HTMLElement {
     super();
     this.shadowDOM = this.attachShadow({ mode: "open" });
   }
+
   set movies(data) {
     this._movies = data;
     this.render();

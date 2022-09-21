@@ -1,6 +1,6 @@
 import axios from "axios";
 
-function main() {
+const main = () => {
   const searchBar = document.querySelector("search-bar");
   const movieList = document.querySelector("movie-list");
 
@@ -18,6 +18,6 @@ function main() {
   };
 
   searchBar.clickEvent = getMovies;
-}
+};
 
 export default main;
