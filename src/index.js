@@ -1,22 +1,23 @@
-function main(){
-    const searchBar = document.querySelector('search-bar');
-    const movieList = document.querySelector('movie-list');
+import axios from "axios";
 
-    const getMovies = ()=>{
-        fetch(`http://www.omdbapi.com/?apikey=8c3a26e3&&s&s=${searchBar.value}`)
-        .then(res => res.json())
-        .then(res => {
-            if(!res.Error){
-                movieList.movieList = res.Search
-            }else{
-                alert(res.Error)
-            }
-        })
-        .catch(err => console.log(err))
-    }
+function main() {
+  const searchBar = document.querySelector("search-bar");
+  const movieList = document.querySelector("movie-list");
 
-    searchBar.clickEvent = getMovies;
+  const getMovies = () => {
+    axios
+      .get(`http://www.omdbapi.com/?apikey=8c3a26e3&&s&s=${searchBar.value}`)
+      .then((res) => {
+        if (!res.data.Error) {
+          movieList.movieList = res.data.Search;
+        } else {
+          alert(res.data.Error);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
+  searchBar.clickEvent = getMovies;
 }
 
 export default main;

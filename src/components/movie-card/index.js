@@ -1,31 +1,33 @@
+import axios from "axios";
 import VanillaTilt from "vanilla-tilt";
 
 class MovieCard extends HTMLElement {
-    constructor(){
-        super();
-        this.shadowDOM = this.attachShadow({mode: 'open'});
-    }
-    set movies(data){
-        this._movies = data;
-        this.render();
-    }
+  constructor() {
+    super();
+    this.shadowDOM = this.attachShadow({ mode: "open" });
+  }
+  set movies(data) {
+    this._movies = data;
+    this.render();
+  }
 
-    render(){
-        const modalContainer = document.querySelector('modal-container');
+  render() {
+    const modalContainer = document.querySelector("modal-container");
 
-        function getMovies(id){
-            fetch(`http://www.omdbapi.com/?apikey=8c3a26e3&&s&i=${id}`)
-            .then(res => res.json())
-            .then(res => {
-                if(res.Response ='true'){
-                    modalContainer.movies = res;
-                }else{
-                    alert('movie is not available')
-                }
-            })
-            .catch(err => console.log(err))
-        }
-        this.shadowDOM.innerHTML =`
+    function getMovies(id) {
+      axios
+        .get(`http://www.omdbapi.com/?apikey=8c3a26e3&&s&i=${id}`)
+        .then((res) => {
+          if (res.status != 200) {
+            alert("movie not available");
+          } else {
+            modalContainer.movies = res.data;
+            modalContainer.visibility = true;
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+    this.shadowDOM.innerHTML = `
         <style>
         *{
             margin: 0;
@@ -72,19 +74,18 @@ class MovieCard extends HTMLElement {
           <img src="${this._movies.Poster}" alt="${this._movies.Title}" class="poster" />
           <h3 class="title">${this._movies.Title}</h3>
         </div>
-        `
-        // get movie data from API
-        this.shadowDOM.querySelector('.poster').addEventListener('click',()=>{
-            getMovies(this._movies.imdbID)
-            modalContainer.visibility = true;
-        })
+        `;
+    // get movie data from API
+    this.shadowDOM.querySelector(".poster").addEventListener("click", () => {
+      getMovies(this._movies.imdbID);
+    });
 
-        // tilt js 
-        VanillaTilt.init(this.shadowRoot.querySelector('.container'),{
-            reverse: true,
-            scale: 1.1,
-        })
-    }
+    // tilt js
+    VanillaTilt.init(this.shadowRoot.querySelector(".container"), {
+      reverse: true,
+      scale: 1.1,
+    });
+  }
 }
 
-customElements.define('movie-card', MovieCard);
+customElements.define("movie-card", MovieCard);
